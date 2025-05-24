@@ -3,20 +3,14 @@ ingress:
   className: nginx
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
   hosts:
     - host: pm.cagatayuresin.com
       paths:
         - path: /
           pathType: Prefix
   tls:
-    - secretName: openproject-tls
-      hosts:
-        - pm.cagatayuresin.com
-
-persistence:
-  enabled: true
-  size: 5Gi
+    enabled: true
+    secretName: openproject-tls
 
 postgresql:
   enabled: true
@@ -25,3 +19,7 @@ postgresql:
     secretKeys:
       adminPasswordKey: postgres-password
       userPasswordKey: password
+
+persistence:
+  enabled: true
+  size: 5Gi
